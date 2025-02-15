@@ -48,7 +48,13 @@ object Build : BuildType({
         // }
         script {
             name = "Test 1"
-            scriptContent = "echo Hello world!"
+            scriptContent = "echo %build.counter%"
+        }
+        if (params.findRawParam("teamcity.ui.settings.readOnly") != null) {
+            script {
+                name = "Conditional test"
+                scriptContent = "echo conditional %build.counter%"
+            }
         }
     }
 
